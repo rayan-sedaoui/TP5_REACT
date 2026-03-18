@@ -1,4 +1,4 @@
-<img width="329" height="428" alt="image" src="https://github.com/user-attachments/assets/4867eed7-8534-427f-8c64-f523a2e81b79" /># TP 5 React : Gestion de l'état et structuration
+# TP 5 React : Gestion de l'état et structuration
 
 Ce projet a été réalisé dans le cadre du TP 5 de React. L'objectif principal est de mettre en pratique la gestion des états (locaux et globaux) et la structuration des composants.
 
