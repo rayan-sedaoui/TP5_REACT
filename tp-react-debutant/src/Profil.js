@@ -1,62 +1,36 @@
 import { useContext } from 'react';
-import { ContexteGlobal } from './UtilisateurContext';
+import { SessionContext } from './SessionContext';
 
 const Profil = () => {
-  const { infosClient, setInfosClient } = useContext(ContexteGlobal);
+  const { session, setSession } = useContext(SessionContext);
 
-  const actionDeconnexion = () => {
-    setInfosClient({ pseudo: '', estEnLigne: false });
+  const fermerSession = () => {
+    setSession({ nomUtilisateur: '', connecte: false });
   };
 
-  const actionConnexion = () => {
-    setInfosClient({ pseudo: 'rayan', estEnLigne: true }); // <-- CHANGÉ ICI
+  const ouvrirSession = () => {
+    setSession({ nomUtilisateur: 'rayan', connecte: true });
   };
 
-  const styleBoutonConnexion = {
-    padding: '10px 20px',
-    borderRadius: '5px',
-    backgroundColor: '#27ae60',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-    fontWeight: 'bold'
-  };
+  const btnStyleIn = { padding: '12px 24px', borderRadius: '6px', backgroundColor: '#28a745', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '600' };
+  const btnStyleOut = { ...btnStyleIn, backgroundColor: '#dc3545' };
 
-  const styleBoutonDeconnexion = {
-    ...styleBoutonConnexion,
-    backgroundColor: '#e74c3c'
-  };
-
-  if (infosClient.estEnLigne) {
+  if (session.connecte) {
     return (
-      <div style={{
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
-        marginBottom: '20px',
-        borderLeft: '5px solid #27ae60'
-      }}>
-        <h2 style={{ color: '#2c3e50', marginTop: 0, marginBottom: '20px' }}>Profil Utilisateur</h2>
-        <p style={{ color: '#27ae60', fontSize: '18px', fontWeight: 'bold' }}>👤 Bienvenue, {infosClient.pseudo}</p>
-        <button onClick={actionDeconnexion} style={styleBoutonDeconnexion}>Se déconnecter</button>
-      </div>
+      <section style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', borderLeft: '6px solid #28a745' }}>
+        <h2 style={{ color: '#495057', marginTop: 0, marginBottom: '15px' }}>Espace Utilisateur</h2>
+        <p style={{ color: '#28a745', fontSize: '19px', fontWeight: 'bold' }}>Bonjour, {session.nomUtilisateur}</p>
+        <button onClick={fermerSession} style={btnStyleOut}>Se déconnecter</button>
+      </section>
     );
   }
 
   return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '20px',
-      borderRadius: '10px',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
-      marginBottom: '20px',
-      borderLeft: '5px solid #e74c3c'
-    }}>
-      <h2 style={{ color: '#2c3e50', marginTop: 0, marginBottom: '20px' }}>Profil Utilisateur</h2>
-      <p style={{ color: '#e74c3c', fontSize: '18px', fontStyle: 'italic' }}>⚠️ Veuillez vous connecter.</p>
-      <button onClick={actionConnexion} style={styleBoutonConnexion}>Se connecter</button>
-    </div>
+    <section style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', borderLeft: '6px solid #dc3545' }}>
+      <h2 style={{ color: '#495057', marginTop: 0, marginBottom: '15px' }}>Espace Utilisateur</h2>
+      <p style={{ color: '#dc3545', fontSize: '19px', fontStyle: 'italic' }}>Vous êtes déconnecté.</p>
+      <button onClick={ouvrirSession} style={btnStyleIn}>Se connecter</button>
+    </section>
   );
 };
 
